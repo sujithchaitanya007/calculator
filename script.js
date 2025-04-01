@@ -10,10 +10,12 @@ function deleteValue() {
     let display = document.getElementById("display");
     display.value = display.value.slice(0, -1);
 }
-
 function calculate() {
     try {
-        let result = eval(document.getElementById("display").value);
+        let expression = document.getElementById("display").value;
+        expression = expression.replace(/(\d+)%/g, "($1/100)");
+
+        let result = eval(expression);
         if (isNaN(result)) {
             document.getElementById("display").value = "Error";
         } else {
@@ -23,6 +25,9 @@ function calculate() {
         document.getElementById("display").value = "Error";
     }
 }
+
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
     let bubblesContainer = document.querySelector(".bubbles");
